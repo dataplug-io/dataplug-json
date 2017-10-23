@@ -1,0 +1,38 @@
+{
+  "name": "@dataplug/dataplug-json",
+  "version": "0.0.0",
+  "description": "Dataplug JSON library (by Dataplug.io)",
+  "main": "lib/index.js",
+  "scripts": {
+    "jsdoc": "jsdoc --destination ./docs --recurse ./lib --verbose",
+    "lint": "standard",
+    "test": "mocha",
+    "coverage": "nyc --reporter=html --reporter=text mocha",
+    "preversion": "npm test",
+    "postversion": "git push && git push --tags"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dataplug-io/dataplug-json.git"
+  },
+  "author": "",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/dataplug-io/dataplug-json/issues"
+  },
+  "homepage": "https://github.com/dataplug-io/dataplug-json#readme",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "oboe": "^2.1.4"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "jsdoc": "^3.5.5",
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0",
+    "standard": "^10.0.3"
+  }
+}
