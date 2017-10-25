@@ -4,12 +4,6 @@ require('chai')
 const dataplugJson = require('../lib')
 
 describe('dataplug-json', () => {
-  it('should have "JsonSequentialStreamsReader" class', () => {
-    dataplugJson
-      .should.have.property('JsonSequentialStreamsReader')
-      .that.is.an('function')
-  })
-
   it('should have "JsonStreamReader" class', () => {
     dataplugJson
       .should.have.property('JsonStreamReader')
