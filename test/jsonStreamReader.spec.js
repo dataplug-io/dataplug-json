@@ -4,7 +4,7 @@ require('chai')
 const { JsonStreamReader } = require('../lib')
 
 describe('JsonStreamReader', () => {
-  it('should transform json to object', () => {
+  it('transforms json to object', () => {
     const object = {
       $attr: 'attrValue',
       subObject: {
