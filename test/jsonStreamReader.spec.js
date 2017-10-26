@@ -70,4 +70,14 @@ describe('JsonStreamReader', () => {
     targetStream.read()
       .should.be.deep.equal({property: 'value'})
   })
+
+  it('supports "complete" event', (done) => {
+    const reader = new JsonStreamReader('!.data.*')
+    reader.on('complete', (data) => {
+      data.should.be.deep.equal({ property: 'value', data: [undefined] })
+      done()
+    })
+    reader.write('{"property":"value","data":[{"itemProperty":"value"}]}')
+    reader.end()
+  })
 })
