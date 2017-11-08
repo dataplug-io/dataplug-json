@@ -1,34 +1,56 @@
 /* eslint-env node, mocha */
-const should = require('chai')
+require('chai')
   .should()
 const { PassThrough } = require('stream')
 const { JsonStreamReader } = require('../lib')
 
 describe('JsonStreamReader', () => {
-  it('transforms empty JSON to null', () => {
+  it('transforms empty JSON to null', (done) => {
     const reader = new JsonStreamReader()
+
+    let data = []
+    reader
+      .on('end', () => {
+        data.should.be.lengthOf(0)
+        done()
+      })
+      .on('data', (chunk) => data.push(chunk))
+
     reader.end()
-    const data = reader.read()
-    should.not.exist(data)
   })
 
-  it('transforms empty JSON array to null', () => {
+  it('transforms empty JSON array to null', (done) => {
     const reader = new JsonStreamReader()
+
+    let data = []
+    reader
+      .on('end', () => {
+        data.should.be.lengthOf(0)
+        done()
+      })
+      .on('data', (chunk) => data.push(chunk))
+
     reader.write('[]')
     reader.end()
-    const data = reader.read()
-    should.not.exist(data)
   })
 
-  it('transforms simple JSON to object', () => {
+  it('transforms simple JSON to object', (done) => {
     const reader = new JsonStreamReader()
+
+    let data = []
+    reader
+      .on('end', () => {
+        data.should.be.lengthOf(1)
+        data[0].should.be.deep.equal({property: 'value'})
+        done()
+      })
+      .on('data', (chunk) => data.push(chunk))
+
     reader.write('[{"property":"value"}]')
     reader.end()
-    reader.read()
-      .should.be.deep.equal({property: 'value'})
   })
 
-  it('transforms complex JSON to object', () => {
+  it('transforms complex JSON to object', (done) => {
     const object = {
       $attr: 'attrValue',
       subObject: {
@@ -36,39 +58,58 @@ describe('JsonStreamReader', () => {
       }
     }
     const reader = new JsonStreamReader()
+
+    let data = []
+    reader
+      .on('end', () => {
+        data.should.be.lengthOf(1)
+        data[0].should.be.deep.equal(object)
+        done()
+      })
+      .on('data', (chunk) => data.push(chunk))
+
     reader.write(JSON.stringify([object]))
     reader.end()
-    reader.read()
-      .should.be.deep.equal(object)
   })
 
-  it('supports chaining without data', () => {
+  it('supports chaining without data', (done) => {
     const sourceStream = new PassThrough()
     const reader = new JsonStreamReader()
     const targetStream = new PassThrough({ objectMode: true })
+
+    let data = []
+    targetStream
+      .on('end', () => {
+        data.should.be.lengthOf(0)
+        done()
+      })
+      .on('data', (chunk) => data.push(chunk))
 
     sourceStream
       .pipe(reader)
       .pipe(targetStream)
     sourceStream.end()
-
-    const data = targetStream.read()
-    should.not.exist(data)
   })
 
-  it('supports chaining with data', () => {
+  it('supports chaining with data', (done) => {
     const sourceStream = new PassThrough()
     const reader = new JsonStreamReader()
     const targetStream = new PassThrough({ objectMode: true })
+
+    let data = []
+    targetStream
+      .on('end', () => {
+        data.should.be.lengthOf(1)
+        data[0].should.be.deep.equal({property: 'value'})
+        done()
+      })
+      .on('data', (chunk) => data.push(chunk))
 
     sourceStream
       .pipe(reader)
       .pipe(targetStream)
     sourceStream.write('[{"property":"value"}]')
     sourceStream.end()
-
-    targetStream.read()
-      .should.be.deep.equal({property: 'value'})
   })
 
   it('supports "complete" event', (done) => {

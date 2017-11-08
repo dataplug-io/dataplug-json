@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/dataplug-io/dataplug-json#readme",
   "dependencies": {
+    "check-types": "^7.3.0",
     "lodash": "^4.17.4",
     "oboe": "^2.1.4"
   },
