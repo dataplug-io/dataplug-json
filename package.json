@@ -26,6 +26,8 @@
   },
   "homepage": "https://github.com/dataplug-io/dataplug-json#readme",
   "dependencies": {
+    "bluebird": "^3.5.1",
+    "chai-as-promised": "^7.1.1",
     "check-types": "^7.3.0",
     "lodash": "^4.17.4",
     "oboe": "^2.1.4",
