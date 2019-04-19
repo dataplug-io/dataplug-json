@@ -1,6 +1,6 @@
 {
   "name": "@dataplug/dataplug-json",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "description": "Dataplug JSON library (by Dataplug.io)",
   "main": "lib/index.ts",
   "scripts": {
@@ -41,13 +41,10 @@
     "jest": "^24.7.1",
     "oboe": "^2.1.4",
     "prettier": "^1.17.0",
-    "ts-stream": "^2.0.0",
     "winston": "^2.4.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
-    "chai": "^4.1.2",
-    "chai-as-promised": "^7.1.1",
     "coveralls": "^3.0.3",
     "jsdoc": "^3.5.5",
     "standard": "^10.0.3",

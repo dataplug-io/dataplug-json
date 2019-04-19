@@ -1,11 +1,10 @@
-/// <reference types="node" />
 import { PassThrough } from 'stream';
 import { Promise } from 'bluebird';
-import logger from 'winston';
+import * as logger from 'winston';
 import { JsonStreamReader } from '../lib';
 import 'ts-jest';
 
-// logger.clear();
+logger.clear();
 
 describe('JsonStreamReader', () => {
   it('transforms empty JSON to null', done => {
@@ -175,7 +174,7 @@ describe('JsonStreamReader', () => {
           });
       }),
     )
-      .rejects.toEqual('Bad value\nLn: 1\nCol: 11\nChr: <')
+      .rejects.toThrow('Bad value\nLn: 1\nCol: 11\nChr: <')
       .then(done);
     reader.resume();
 

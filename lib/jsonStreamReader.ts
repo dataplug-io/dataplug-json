@@ -1,9 +1,7 @@
 import * as oboe from 'oboe';
 import { Transform } from 'stream';
-const _ = require('lodash');
-// import { Transform } from 'stream';
-const logger = require('winston');
-// const { Transform } = require('ts-stream');
+import * as _ from 'lodash';
+import * as logger from 'winston';
 
 /**
  * Transforms input JSON data stream to output object stream

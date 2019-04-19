@@ -1,6 +1,5 @@
 const _ = require('lodash');
 import { Transform } from 'stream';
-// import * as check from 'check-types';
 import logger from 'winston';
 
 /**
@@ -26,8 +25,6 @@ export default class JsonStreamWriter extends Transform {
     space = undefined,
     abortOnError: boolean = false,
   ) {
-    // check.assert.boolean(abortOnError);
-
     super({
       objectMode: false,
       readableObjectMode: false,
